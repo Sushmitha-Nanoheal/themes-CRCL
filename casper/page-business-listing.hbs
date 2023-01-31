@@ -1,0 +1,406 @@
+{{!< default}}
+
+<style>
+    .FormData{
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        position:relative;
+        gap:20px;
+        padding-left:40px;      
+    }
+    .organizationName1, .SelectLocation, .AboutUs, .SelectWebsite, .selectIndurtries, .number, .Specialties,   
+    .email, .FoundedIn, .Type {
+        width:50%;
+        height:45px;
+        font-style: italic;
+        display:flex;
+    }
+    .submit{
+        width:10%;
+        margin-left: 16%;
+
+    }
+    span{
+        color:red;
+    }
+    label{
+      font-style:italic;
+    }
+    .Contries{
+      display:flex;
+    }
+    .lists{
+      display:flex;
+      gap:30px;
+    }
+</style>
+<br/>
+
+<form class="contact-form" id="contact-form" method="get">
+<div class="FormData">
+    <div >
+        <label>Name of the organization </label>
+    <input type="text" name="title" title="Name" id="organizationName" class="organizationName1" />
+    <span id="NameError" style="display: none;">*Please enter name of Organization </span>
+    </div>
+    <div class="Contries">
+    <div >
+      <label>Country:</label>
+                <select name="country" id="countyList">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+            <div class="lists">
+                <label>State:</label>
+                <select name="state" id="stateList">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+            <div class="lists">
+                <label>City:</label>
+                <select name="city" id="cityList">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+          <div>
+      </div>
+       </div>
+       <div>
+        <label>Location </label>
+    <select class="SelectLocation" id="SelectLocation" name="Location" title="Location" >       
+        <option disabled selected></option>
+        <option value="karnataka">karnataka</option>
+        <option value="ap">ap</option>
+    </select>
+    <span id="location" style="display: none;">*Please select the location</span>
+   </div>
+    <div>
+        <label>About us </label>
+    <textarea id="message" class="AboutUs" title="Aboutus" name="About us" maxlength="2000" cols="60" rows="5"  ></textarea>
+    <span id="aboutusError" style="display: none;" >*Please fill the field </span>
+    </div>
+    <div>
+        <label>Website  </label>
+    <select class="SelectWebsite" id="SelectWebsite"  name="Website" title="Website">
+        <option disabled selected></option>
+        <option value="Discord">Discord</option>
+        <option value="Facebook">Facebook</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Youtube">Youtube</option>
+    </select>
+    <span id="Website" style="display: none;">*Please select the website</span>
+    </div>
+    <div>
+    <label>Industries  </label>
+    <select class="selectIndurtries" id="selectIndurtries"  name="Indurstry" title="Indurstry">
+        <option  disabled selected></option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Arts">Arts</option>
+        <option value="Construction">Construction</option>
+        <option value="Consumer Goods">Consumer Goods</option>
+        <option value="Corporate Services">Corporate Services</option>
+        <option value="Design">Design</option>
+        <option value="Education">Education</option>
+        <option value="Energy & Mining">Energy & Mining</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Finance">Finance</option>
+        <option value="Hardware & Networking">Hardware & Networking</option>
+        <option value="Health Care">Health Care</option>
+        <option value="Legal">Legal</option>
+        <option value="Manufacturing">Manufacturing</option>
+        <option value="Media & Communications">Media & Communications</option>
+        <option value="Nonprofit">Nonprofit</option>
+        <option value="Public Administration">Public Administration</option>
+        <option value="Public Safety">Public Safety</option>
+        <option value="Real Estate">Real Estate</option>
+        <option value="Recreation & Travel">Recreation & Travel</option>
+        <option value="Retail">Retail</option>
+        <option value="Software & IT Services">Software & IT Services</option>
+        <option value="Transportation & Logistics">Transportation & Logistics</option>
+        <option value="Wellness & Fitness">Wellness & Fitness</option>
+    </select>
+    <span id="industry" style="display: none;">Please select Indrustry</span>
+    </div>
+    <div>
+        <label>Company Size  </label>
+    <input type="number" id="CompanySize" name="Company Size"  title="Company Size" class="number" />
+    <span id="company" style="display: none;">*Please select the company Size</span>
+    </div>
+    <div>
+        <label>Email  </label>
+    <input type="email" id="email" class="email" name="Email" title="Email" placeholder="" />
+    <span id="Email" style="display: none;">Please enter a valid email address</span>
+    </div>
+    <div>
+        <label> Type  </label>
+    <select class="Type" name="Type" title="Type" id="Type" >
+        <option  disabled selected></option>
+        <option value="Sole Proprietorships"><a href="#">Sole Proprietorships</a></option>
+        <option value="Partnerships"><a href="#">Partnerships</a></option>
+        <option value="Corporations"><a href="#">Corporations</a></option>
+        <option value="S Corporations"><a href="#">S Corporations</a></option>
+     </select>
+     <span id="Typeof" style="display: none;">Please select a Type</span>
+     </div>
+     <div>
+        <label>Founded In  </label>
+     <input type="number" id="FoundedIn" name="Founded"  title="Founded" class="FoundedIn" />
+     <span id="founded" style="display: none;">Please enter a valid year</span>
+     </div>
+     <div>
+        <label>Specialties  </label>
+      <input type="text"  id="Specialties" name="specialization" class="Specialties" placeholder="" />
+      <span id="special"style="display: none;">*Please fill the field</span>
+     </div> 
+     <div id="uploadButton" >
+      <input type="file" id="fileInput" title="Upload PNG" name="Upload PNG" value="Upload PNG"/>
+     <input type="submit" id="submit-button" value="Submit" class="submit"/>
+     </div>
+</form>
+
+
+<script>
+// form validations
+
+  const orgname = document.querySelector("#organizationName");   
+  const nameError = document.querySelector("#NameError"); 
+  const locationInput = document.querySelector("#SelectLocation"); 
+  const locationError = document.querySelector("#location"); 
+  const aboutusInput = document.querySelector("#message"); 
+  const aboutusError = document.querySelector("#aboutusError"); 
+  const websiteInput = document.querySelector("#SelectWebsite"); 
+  const websiteError = document.querySelector("#Website"); 
+  const CompanySizeInput = document.querySelector("#CompanySize"); 
+  const CompanySizeError = document.querySelector("#company"); 
+  const specialtyInput = document.querySelector("#Specialties"); 
+  const specialtyError = document.querySelector("#special"); 
+  const colorSelect = document.querySelector("#Type");
+  const colorError = document.querySelector("#Typeof");
+  const yearInput = document.querySelector("#FoundedIn");
+  const yearError = document.querySelector("#founded");  
+  const emailInput = document.querySelector("#email"); 
+  const emailError = document.querySelector("#Email");
+  const selectIndurtries = document.querySelector("#selectIndurtries");
+  const industryError = document.querySelector("#industry");
+
+//year validation
+yearInput.addEventListener("input", function() {
+  yearError.style.display = "none";
+});
+
+orgname.addEventListener("input", function(){
+ nameError.style.display="none";
+});
+locationInput.addEventListener("input", function(){
+  locationError.style.display="none";
+});
+
+aboutusInput.addEventListener("input", function(){
+  aboutusError.style.display="none";
+});
+
+websiteInput.addEventListener("input", function(){
+  websiteError.style.display="none";
+});
+
+selectIndurtries.addEventListener("input", function(){
+  industryError.style.display="none";
+});
+CompanySizeInput.addEventListener("input", function(){
+ CompanySizeError.style.display="none";
+});
+
+ emailInput.addEventListener("input", function() {
+  emailError.style.display = "none";
+});
+
+colorSelect.addEventListener("input", function(){
+ colorError.style.display="none";
+});
+
+specialtyInput.addEventListener("input", function(){
+ specialtyError.style.display="none";
+});
+
+//email validation
+function validateEmail(email) {
+  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return regex.test(email);
+}
+
+//year validation
+function validateYear(year) {
+  const regex = /^\d{4}$/;
+  return regex.test(year) && year >= 1900 && year <= new Date().getFullYear();
+}
+
+
+    //cascading nested drowpdown for country, state and cities 
+     var worldData = {
+                USA: {
+                    California: ["Los Angeles", "San Diego", "Sacramento"],
+                    Texas: ["Houston", "Austin"],
+                    Florida: ["Miami", "Orlando", "Tampa"],
+                },
+                India: {
+                    Maharashtra: ["Mumbai", "Pune", "Nagpur"],
+                    TamilNadu: ["Chennai", "Madurai"],
+                    Karnataka: ["Bangalore", "Mangalore"],
+                },
+                Canada: {
+                    Alberta: ["Calgary", "Edmonton", "Red Deer"],
+                    BritishColumbia: ["Vancouver", "Kelowna"],
+                    Manitoba: ["Winnipeg", "Brandon"],
+                },
+                Germany: {
+                    Bavaria: ["Munich", "Nuremberg"],
+                    NorthRhine: ["Cologne", "Düsseldorf"],
+                },
+            };
+            window.onload = function () {
+                var countyList = document.getElementById("countyList"),
+                    stateList = document.getElementById("stateList"),
+                    cityList = document.getElementById("cityList");
+                for (var country in worldData) {
+                    countyList.options[countyList.options.length] = new Option(country, country);
+                }
+                countyList.onchange = function () {
+                    stateList.length = 1;
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    for (var state in worldData[this.value]) {
+                        stateList.options[stateList.options.length] = new Option(state, state);
+                    }
+                };
+                countyList.onchange();
+                stateList.onchange = function () {
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    var city = worldData[countyList.value][this.value];
+                    for (var i = 0; i < city.length; i++) {
+                        cityList.options[cityList.options.length] = new Option(city[i], city[i]);
+                    }
+                };
+            };    
+
+
+//submit function operation
+const form=document.getElementById("contact-form");  
+ form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const formData = new FormData(form);
+    const formValues = {};
+    for (const [key, value] of formData.entries()) {
+      formValues[key] = value;
+    }
+    console.log(formValues);
+   
+   
+  const nameErr = orgname.value;
+  const EmailError = emailInput.value;
+  const yearss = yearInput.value;
+  const color = colorSelect.value;
+  const Indurtries=selectIndurtries.value;
+  const locationErr=locationInput.value;
+  const AboutusErr = aboutusInput.value;
+  const webError = websiteInput.value;
+  const companySizeErr = CompanySizeInput.value;
+  const SpecialErr = specialtyInput.value;
+
+     
+         document.getElementById("uploadButton").onclick = () => {
+      let fileElement = document.getElementById('fileInput')
+
+      // check if user had selected a file
+      if (!fileElement.files.length) {
+        alert('please choose a file')
+        return
+      }
+
+      let file = fileElement.files[0]
+
+      let formData = new FormData();
+      formData.set('file', file);
+
+      axios.post("/", formData, {
+        onUploadProgress: progressEvent => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          console.log(`upload process: ${percentCompleted}%`);
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          console.log(res.data.url)
+        })
+    }
+     
+
+    if(!nameErr){
+    nameError.style.display="block";
+    return;
+  }
+  nameError.style.display="none";
+
+  if(!locationErr){
+    locationError.style.display="block";
+    return;
+  }
+  locationError.style.display="none";
+
+  if(!AboutusErr){
+    aboutusError.style.display="block";
+    return;
+  }
+  aboutusError.style.display="none";
+
+  if(!webError){
+    websiteError.style.display="block";
+    return;
+  }
+    websiteError.style.display="none";
+
+  if (!Indurtries) {
+    industryError.style.display = "block";
+    return;
+  }
+  industryError.style.display="none";
+
+  if(!companySizeErr){
+    CompanySizeError.style.display="block";
+    return;
+  }
+  CompanySizeError.style.display="none";
+
+
+  if (!validateEmail(EmailError)) {
+    emailError.style.display = "block";
+    return;
+  }
+  emailError.style.display = "none";
+
+    if (!color) {
+    colorError.style.display = "block";
+    return;
+  }
+    colorError.style.display = "none";
+
+  if (!validateYear(yearss)) {
+    yearError.style.display = "block";
+    return;
+  }
+  yearError.style.display = "none";
+  
+  if(!SpecialErr){
+    specialtyError.style.display="block";
+    return;
+  }
+  specialtyError.style.display="none";
+
+   
+ })
+</script>
