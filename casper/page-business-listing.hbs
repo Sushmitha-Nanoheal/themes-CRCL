@@ -11,7 +11,7 @@
         padding-left:40px;      
     }
     .organizationName1, .SelectLocation, .AboutUs, .SelectWebsite, .selectIndurtries, .number, .Specialties,   
-    .email, .FoundedIn, .Type {
+    .email, .FoundedIn, .Type, .country, .City {
         width:50%;
         height:45px;
         font-style: italic;
@@ -29,69 +29,67 @@
       font-style:italic;
     }
     .Contries{
-      display:flex;
+      display:block;
     }
     .lists{
       display:flex;
       gap:30px;
     }
+    .SocialMedia{
+      display: grid;
+      width: 39%;
+      gap: 6px;
+    }
+    .mediaURL{
+      display:flex;
+      justify-content:space-between;
+    }
+   .uploadPNG, .uploadCover{
+        background: #efefef;
+        border: 1px solid black;
+        padding: 10px;
+        display: inline-block;
+        width: 135px;
+   }
 </style>
 <br/>
 
 <form class="contact-form" id="contact-form" method="get">
 <div class="FormData">
     <div >
-        <label>Name of the organization </label>
+    <label>Name of the organization </label>
     <input type="text" name="title" title="Name" id="organizationName" class="organizationName1" />
     <span id="NameError" style="display: none;">*Please enter name of Organization </span>
     </div>
-    <div class="Contries">
-    <div >
-      <label>Country:</label>
-                <select name="country" id="countyList">
-                    <option value="" selected="selected"></option>
-                </select>
-            </div>
-            <div class="lists">
-                <label>State:</label>
-                <select name="state" id="stateList">
-                    <option value="" selected="selected"></option>
-                </select>
-            </div>
-            <div class="lists">
-                <label>City:</label>
-                <select name="city" id="cityList">
-                    <option value="" selected="selected"></option>
-                </select>
-            </div>
-          <div>
-      </div>
-       </div>
-       <div>
-        <label>Location </label>
-    <select class="SelectLocation" id="SelectLocation" name="Location" title="Location" >       
-        <option disabled selected></option>
-        <option value="karnataka">karnataka</option>
-        <option value="ap">ap</option>
-    </select>
-    <span id="location" style="display: none;">*Please select the location</span>
-   </div>
+    <div>
+      <label for="countries">Country</label>
+      <select class="country" id="Count" onclick="loadCountries()" name="countries">
+        <option disabled selected>               </option>
+      </select>
+      <span id="countryError" style="display:none;">*Please select the country</span>
+     </div>
+     <div>
+        <label>City</label>
+        <input type="text" class="City" id="City" name="City"/>
+        <span id="cityError" style="display:none;">*Please enter city</span>
+    </div>
     <div>
         <label>About us </label>
     <textarea id="message" class="AboutUs" title="Aboutus" name="About us" maxlength="2000" cols="60" rows="5"  ></textarea>
     <span id="aboutusError" style="display: none;" >*Please fill the field </span>
     </div>
     <div>
-        <label>Website  </label>
-    <select class="SelectWebsite" id="SelectWebsite"  name="Website" title="Website">
-        <option disabled selected></option>
-        <option value="Discord">Discord</option>
-        <option value="Facebook">Facebook</option>
-        <option value="LinkedIn">LinkedIn</option>
-        <option value="Instagram">Instagram</option>
-        <option value="Youtube">Youtube</option>
-    </select>
-    <span id="Website" style="display: none;">*Please select the website</span>
+      <label>Website</label>
+      <input type="url" name="URL" id="url" class="urlinput"  />
+      <span id="urlError" style="display:none">*Please enter valid URL</span>
+    </div>
+    <div class="SocialMedia">
+        <label>social media URLs  </label>
+        <div class="mediaURL"><label >Discord</label><input type="text" id="discard" name="Discard" /></div>
+        <div class="mediaURL"><label>Facebook</label><input type="text" id="facebook" name="facebook" /></div>
+        <div class="mediaURL"><label>LinkedIn</label><input type="text" id="linkedin" name="linkedin" /></div>
+        <div class="mediaURL"><label>Instagram</label><input type="text" id="instagram" name="instagram"/></div>
+        <div class="mediaURL"><label>Youtube</label><input type="text" id="youtube" name="youtube"/></div>
     </div>
     <div>
     <label>Industries  </label>
@@ -156,23 +154,47 @@
       <span id="special"style="display: none;">*Please fill the field</span>
      </div> 
      <div id="uploadButton" >
-      <input type="file" id="fileInput" title="Upload PNG" name="Upload PNG" value="Upload PNG"/>
+      <label for="UploadPNG" class="uploadPNG">Upload .png</label>
+      <input type="file" id="UploadPNG" style="display: none;" accept="image/png"  name="Upload PNG" />
+      <Span id="pngError" style="display: none;">*Please select the file</Span>
+      </div>
+      <div id="uploadButton">
+        <label for="fileInput" class="uploadCover">Upload Cover</label>
+      <input type="file" id="fileInput" style="display: none;" class="uploadCover" accept="image/png"  name="Upload cover"/>
+      <Span id="coverError" style="display: none;">*Please select the file</Span>
+      </div>
      <input type="submit" id="submit-button" value="Submit" class="submit"/>
-     </div>
 </form>
 
-
 <script>
-// form validations
+ 
 
+//List of countries
+ function loadCountries() {
+        const Count = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+        var select = document.getElementById("Count");
+        for (var i = 0; i < Count.length; i++) {
+          var option = document.createElement("option");
+          option.text = Count[i];
+          select.add(option);
+        }
+      }
+
+// form validations
   const orgname = document.querySelector("#organizationName");   
   const nameError = document.querySelector("#NameError"); 
-  const locationInput = document.querySelector("#SelectLocation"); 
-  const locationError = document.querySelector("#location"); 
+  const locationInput = document.querySelector("#Count"); 
+  const locationError = document.querySelector("#countryError"); 
+  const CityInput = document.querySelector("#City"); 
+  const fileInput = document.querySelector("#UploadPNG"); 
+  const fileError = document.querySelector("#pngError"); 
+  const coverInput = document.querySelector("#fileInput"); 
+  const coverError = document.querySelector("#coverError"); 
+  const CityError = document.querySelector("#cityError"); 
   const aboutusInput = document.querySelector("#message"); 
   const aboutusError = document.querySelector("#aboutusError"); 
-  const websiteInput = document.querySelector("#SelectWebsite"); 
-  const websiteError = document.querySelector("#Website"); 
+  const urlInput = document.querySelector("#url"); 
+  const urlError = document.querySelector("#urlError"); 
   const CompanySizeInput = document.querySelector("#CompanySize"); 
   const CompanySizeError = document.querySelector("#company"); 
   const specialtyInput = document.querySelector("#Specialties"); 
@@ -197,13 +219,16 @@ orgname.addEventListener("input", function(){
 locationInput.addEventListener("input", function(){
   locationError.style.display="none";
 });
+CityInput.addEventListener("input", function(){
+ CityError.style.display="none";
+});
 
 aboutusInput.addEventListener("input", function(){
   aboutusError.style.display="none";
 });
 
-websiteInput.addEventListener("input", function(){
-  websiteError.style.display="none";
+urlInput.addEventListener("input", function(){
+  urlError.style.display="none";
 });
 
 selectIndurtries.addEventListener("input", function(){
@@ -224,6 +249,12 @@ colorSelect.addEventListener("input", function(){
 specialtyInput.addEventListener("input", function(){
  specialtyError.style.display="none";
 });
+fileInput.addEventListener("input", function(){
+ fileError.style.display="none";
+});
+coverInput.addEventListener("input", function(){
+ coverError.style.display="none";
+});
 
 //email validation
 function validateEmail(email) {
@@ -231,61 +262,17 @@ function validateEmail(email) {
   return regex.test(email);
 }
 
+//Validate URL
+function validateURL(url) {
+  const regex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+  return regex.test(url);
+}
+
 //year validation
 function validateYear(year) {
   const regex = /^\d{4}$/;
   return regex.test(year) && year >= 1900 && year <= new Date().getFullYear();
 }
-
-
-    //cascading nested drowpdown for country, state and cities 
-     var worldData = {
-                USA: {
-                    California: ["Los Angeles", "San Diego", "Sacramento"],
-                    Texas: ["Houston", "Austin"],
-                    Florida: ["Miami", "Orlando", "Tampa"],
-                },
-                India: {
-                    Maharashtra: ["Mumbai", "Pune", "Nagpur"],
-                    TamilNadu: ["Chennai", "Madurai"],
-                    Karnataka: ["Bangalore", "Mangalore"],
-                },
-                Canada: {
-                    Alberta: ["Calgary", "Edmonton", "Red Deer"],
-                    BritishColumbia: ["Vancouver", "Kelowna"],
-                    Manitoba: ["Winnipeg", "Brandon"],
-                },
-                Germany: {
-                    Bavaria: ["Munich", "Nuremberg"],
-                    NorthRhine: ["Cologne", "Düsseldorf"],
-                },
-            };
-            window.onload = function () {
-                var countyList = document.getElementById("countyList"),
-                    stateList = document.getElementById("stateList"),
-                    cityList = document.getElementById("cityList");
-                for (var country in worldData) {
-                    countyList.options[countyList.options.length] = new Option(country, country);
-                }
-                countyList.onchange = function () {
-                    stateList.length = 1;
-                    cityList.length = 1;
-                    if (this.selectedIndex < 1) return;
-                    for (var state in worldData[this.value]) {
-                        stateList.options[stateList.options.length] = new Option(state, state);
-                    }
-                };
-                countyList.onchange();
-                stateList.onchange = function () {
-                    cityList.length = 1;
-                    if (this.selectedIndex < 1) return;
-                    var city = worldData[countyList.value][this.value];
-                    for (var i = 0; i < city.length; i++) {
-                        cityList.options[cityList.options.length] = new Option(city[i], city[i]);
-                    }
-                };
-            };    
-
 
 //submit function operation
 const form=document.getElementById("contact-form");  
@@ -306,9 +293,12 @@ const form=document.getElementById("contact-form");
   const Indurtries=selectIndurtries.value;
   const locationErr=locationInput.value;
   const AboutusErr = aboutusInput.value;
-  const webError = websiteInput.value;
+  const urlErr = urlInput.value;
   const companySizeErr = CompanySizeInput.value;
   const SpecialErr = specialtyInput.value;
+  const CityErr = CityInput.value;
+  const fileErr = fileInput.value;
+  const coverErr = coverInput.value;
 
      
          document.getElementById("uploadButton").onclick = () => {
@@ -316,7 +306,6 @@ const form=document.getElementById("contact-form");
 
       // check if user had selected a file
       if (!fileElement.files.length) {
-        alert('please choose a file')
         return
       }
 
@@ -352,17 +341,24 @@ const form=document.getElementById("contact-form");
   }
   locationError.style.display="none";
 
+  if(!CityErr){
+    CityError.style.display="block";
+    return;
+  }
+  CityError.style.display="none";
+
   if(!AboutusErr){
     aboutusError.style.display="block";
     return;
   }
   aboutusError.style.display="none";
 
-  if(!webError){
-    websiteError.style.display="block";
+  if (!validateURL(urlErr)) {
+    urlError.style.display = "block";
     return;
   }
-    websiteError.style.display="none";
+  urlError.style.display = "none";
+
 
   if (!Indurtries) {
     industryError.style.display = "block";
@@ -401,6 +397,16 @@ const form=document.getElementById("contact-form");
   }
   specialtyError.style.display="none";
 
-   
+  if(!fileErr){
+    fileError.style.display="block";
+    return;
+  }
+  fileError.style.display="none"; 
+
+  if(!coverErr){
+    coverError.style.display="block";
+    return;
+  }
+  coverError.style.display="none"; 
  })
 </script>
